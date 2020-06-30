@@ -45,37 +45,44 @@
 
 
 ---
-ЗАПУСК:
+КОНФИГУРАЦИЯ И ЗАПУСК:
+- конфигурацию контейнеров производить тут:
+    0. переименовать файл .env.example в .env, указать реальные пути к проекту (локально), user-password для БД
+    0. /docker/nginx.conf/nginx.conf:  
+        - server_name - имя сайта в браузере
+        - прописать в hosts (Windows\System32\drivers\etc): 127.0.0.1 site.local - то, что указано в server_name
+    0. docker\postgres\docker-entrypoint-initdb.d - отработает при запуске postgres
+    0. docker\mysql\docker-entrypoint-initdb.d\init.sql - отработает при запуске mysql (создание БД, заполнение итд)
+
 - в папке /docker запустить контейнеры:
+    > docker-compose up -d --build main pgs  
+    в дальнейшем, если не менять конфигурацию можно писать так:  
     > docker-compose up -d
 - войти в контейнер php:
     > docker-compose exec php bash
 - подтянуть зависимости:
     > composer update  
-        or
+        or  
     > composer install  
-- накатить миграции (предварительно написать миграции в /database/migrations):
-    > php vendor/bin/phinx migrate
-    > php vendor/bin/phinx seed:run
+
 
 
 ---
 СТРУКТУРА ПАПОК:
 - docker (контейнеры: php, nginx, mysql. и все для их запуска)
-- mysql (файлы БД. Эта папка появится после запуска контейнеров)
-- site.local (сам проект)
-    - database/ (для robmorgan/phinx. тут находятся миграции, сиды, data - папка для отдельных запросов mysql)
+- mysql (файлы БД. Эта папка появится после запуска контейнеров и создания БД)
+- site.local (сам проект, корневая папка для nginx),  
+    развернут Ларавел  
     - public/ (здесь находится index.php)
     - vendor/ (появится после подтягивания зависимостей)
-    - phinx.yml (конфиг для phinx)
 
 ---
 ПРОЧЕЕ ДОКУ:
 
-Phinx
-https://sergeivl.ru/phinx-migration.html (простой старт)
-https://github.com/cakephp/phinx (доку от разрабов)
+Phinx  
+https://sergeivl.ru/phinx-migration.html (простой старт)  
+https://github.com/cakephp/phinx (доку от разрабов)  
 
-Faker
-https://github.com/fzaninotto/Faker
+Faker  
+https://github.com/fzaninotto/Faker  
 
