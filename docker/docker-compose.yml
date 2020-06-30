@@ -1,0 +1,87 @@
+version: '3'
+
+services:
+
+    main:
+        image: nginx:latest
+        ports:
+            - "80:80"
+        volumes:
+            - "../site.local:/var/www/site.local"
+            - "./nginx.conf:/etc/nginx/conf.d"
+            - socket:/var/run
+        depends_on:
+            - "php"
+        networks:
+            - internal
+    php:
+        build: "./php-fpm"
+        volumes:
+            - "../site.local:/var/www/site.local"
+            - "./php-ini:/usr/local/etc/php/custom.d"
+            - socket:/var/run
+        environment:
+            PHP_INI_SCAN_DIR: "/usr/local/etc/php/custom.d:/usr/local/etc/php/conf.d"
+        networks:
+            - internal
+
+### Postgress Container #########################################
+    pgs:
+        image: postgres
+        ports:
+            - "5432:5432"
+        volumes:
+            - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+        restart: always
+        environment:
+            POSTGRES_USER: ${PGS_USERNAME}
+            POSTGRES_PASSWORD: ${PGS_PASSWORD}
+            POSTGRES_DB: ${PGS_DBNAME}
+
+
+### MongoDB Container #########################################
+    #mongodb:
+    #    image: mongo:latest
+    #    restart: always
+    #    environment:
+    #        MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+    #        MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    #    ports:
+    #        - 27017:27017
+    #    volumes:
+    #        - mongodb_data_container:/data/db
+        
+
+### MySQL Container #########################################
+    #mysql:
+    #    build:
+    #        context: ./mysql
+    #        args:
+    #            - MYSQL_VERSION=${MYSQL_VERSION}
+    #    environment:
+    #        - MYSQL_DATABASE=${MYSQL_DATABASE}
+    #        - MYSQL_USER=${MYSQL_USER}
+    #        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    #        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    #        - TZ=${WORKSPACE_TIMEZONE}
+    #    volumes:
+    #        - "../site.local:/var/www/site.local"
+    #        - ${DATA_SAVE_PATH}/mysql:/var/lib/mysql
+    #        - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
+    #    ports:
+    #        - "${MYSQL_PORT}:3306"
+    #    user: "1000:50"
+    #    networks:
+    #        - internal
+        
+        
+### Volumes Setup #############################################
+volumes:
+    socket:
+    mysql:
+        driver: "local"
+
+### Networks Setup ############################################
+networks:
+    internal:
+        driver: "bridge"
