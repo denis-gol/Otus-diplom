@@ -4,6 +4,7 @@ services:
 
     main:
         image: nginx:latest
+        container_name: nginx
         ports:
             - "80:80"
         volumes:
@@ -16,6 +17,7 @@ services:
             - internal
     php:
         build: "./php-fpm"
+        container_name: php
         volumes:
             - "../site.local:/var/www/site.local"
             - "./php-ini:/usr/local/etc/php/custom.d"
@@ -28,15 +30,18 @@ services:
 ### Postgress Container #########################################
     pgs:
         image: postgres
+        container_name: postgres
         ports:
             - "5432:5432"
         volumes:
             - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
         restart: always
         environment:
-            POSTGRES_USER: ${PGS_USERNAME}
-            POSTGRES_PASSWORD: ${PGS_PASSWORD}
-            POSTGRES_DB: ${PGS_DBNAME}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_DATABASE}
+        networks:
+            - internal
 
 
 ### MongoDB Container #########################################
@@ -78,8 +83,8 @@ services:
 ### Volumes Setup #############################################
 volumes:
     socket:
-    mysql:
-        driver: "local"
+#    mysql:
+#        driver: "local"
 
 ### Networks Setup ############################################
 networks:
