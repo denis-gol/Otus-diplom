@@ -15,6 +15,7 @@ services:
             - "php"
         networks:
             - internal
+        restart: always
     php:
         build: "./php-fpm"
         container_name: php
@@ -26,6 +27,7 @@ services:
             PHP_INI_SCAN_DIR: "/usr/local/etc/php/custom.d:/usr/local/etc/php/conf.d"
         networks:
             - internal
+        restart: always
 
 ### Postgress Container #########################################
     pgs:
