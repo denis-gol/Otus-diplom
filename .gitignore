@@ -1,2 +1,4 @@
 /mysql/
 .env
+/site.local/storage/
+/site.local/bootstrap/cache/
