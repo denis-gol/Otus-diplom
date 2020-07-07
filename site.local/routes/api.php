@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+Route::apiResource('student', 'API\StudentController');
+Route::apiResource('group', 'API\GroupController');
+Route::apiResource('course', 'API\CourseController');
+Route::apiResource('lesson', 'API\LessonController');
+Route::apiResource('skill', 'API\SkillController');
+Route::apiResource('skill_level', 'API\SkillLevelController');
+Route::apiResource('task', 'API\TaskController');
+Route::apiResource('achievement', 'API\AchievementController');
