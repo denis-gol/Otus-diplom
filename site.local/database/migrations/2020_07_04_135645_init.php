@@ -24,6 +24,8 @@ class Init extends Migration
         $this->createStudentGroupTable();
         $this->createTaskStudentTable();
         $this->createTaskSkillTable();
+        $this->createSkillLevel();
+        $this->createStudentSkill();
     }
 
     /**
@@ -33,6 +35,8 @@ class Init extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('student_skill');
+        Schema::dropIfExists('skill_level');
         Schema::dropIfExists('task_skill');
         Schema::dropIfExists('task_student');
         Schema::dropIfExists('student_group');
@@ -54,7 +58,6 @@ class Init extends Migration
             $table->integer('user_id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
             $table->foreign('user_id')->references('id')->on('users');
@@ -180,4 +183,30 @@ class Init extends Migration
             $table->foreign('achievement_id')->references('id')->on('achievement');
         });
     }
+
+    protected function createSkillLevel()
+    {
+        Schema::create('skill_level', function (Blueprint $table) {
+            $table->id();
+            $table->integer('skill_id');
+            $table->string('name');
+            $table->string('description');
+            $table->integer('threshold');
+            $table->foreign('skill_id')->references('id')->on('skill');
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
+        });
+    }
+
+    protected function createStudentSkill()
+    {
+        Schema::create('student_skill', function (Blueprint $table) {
+            $table->integer('points');
+            $table->integer('student_id');
+            $table->integer('skill_id');
+            $table->foreign('student_id')->references('id')->on('student');
+            $table->foreign('skill_id')->references('id')->on('skill');
+        });
+    }
+
 }
