@@ -34,7 +34,7 @@ services:
         image: postgres
         container_name: postgres
         ports:
-            - "5432:5432"
+            - "54320:5432"
         volumes:
             - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
         restart: always
@@ -55,7 +55,7 @@ services:
             - "./rabbitmq-persistence:/bitnami"
         environment:
             - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD}
-            - RABBITMQ_PASSWORD=${RABBITMQ_USERNAME}
+            - RABBITMQ_USERNAME=${RABBITMQ_USERNAME}
         networks:
             - internal
 
