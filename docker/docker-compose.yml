@@ -50,14 +50,16 @@ services:
         image: 'bitnami/rabbitmq:latest'
         container_name: rabbitmq
         ports:
-            - "5672:5672"
+            - '5672:5672'
+            - '15672:15672'
         volumes:
-            - "./rabbitmq-persistence:/bitnami"
+            - "rabbitmq-persistence:/bitnami"
         environment:
             - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD}
             - RABBITMQ_USERNAME=${RABBITMQ_USERNAME}
         networks:
             - internal
+        restart: always
 
 ### MongoDB Container #########################################
     #mongodb:
@@ -98,6 +100,7 @@ services:
 ### Volumes Setup #############################################
 volumes:
     socket:
+    rabbitmq-persistence:
 #    mysql:
 #        driver: "local"
 
