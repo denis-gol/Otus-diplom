@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Entity\Student;
 use App\Http\Controllers\Controller;
+use App\Jobs\StudentAfterCreateJob;
+use App\Jobs\StudentAfterDeleteJob;
 use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -51,6 +53,10 @@ class StudentController extends Controller
                 'error' => 'user not found',
             ], 404);
         }
+
+        // запуск Задачи
+        $job = new StudentAfterCreateJob($student_id);
+        $this->dispatch($job);
 
         return response()->json([
             'message' => 'success',
@@ -127,6 +133,18 @@ class StudentController extends Controller
         $result = Student::findOrFail($id)->delete();
 
         if ($result) {
+
+            // запуск Задачи
+            StudentAfterDeleteJob::dispatch($id)->delay(30);
+
+//            dispatch(new StudentAfterDeleteJob($id));
+//            dispatch_now(new StudentAfterDeleteJob($id));
+//
+//            $this->dispatch(new StudentAfterDeleteJob($id));
+//            $this->dispatchNow(new StudentAfterDeleteJob($id));
+
+
+
             return response()->json([
                 'message' => 'success',
                 'student_id' => $id,
