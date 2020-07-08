@@ -45,6 +45,19 @@ services:
         networks:
             - internal
 
+### RabbitMQ Container #########################################
+    rabbitmq:
+        image: 'bitnami/rabbitmq:latest'
+        container_name: rabbitmq
+        ports:
+            - "5672:5672"
+        volumes:
+            - "./rabbitmq-persistence:/bitnami"
+        environment:
+            - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD}
+            - RABBITMQ_PASSWORD=${RABBITMQ_USERNAME}
+        networks:
+            - internal
 
 ### MongoDB Container #########################################
     #mongodb:
