@@ -38,8 +38,8 @@ class Group extends Model
     /**
      * @return BelongsToMany
      */
-    public function students(): BelongsToMany
-    {
-        return $this->belongsToMany(Student::class, 'student_group');
-    }
+//    public function students(): BelongsToMany
+//    {
+//        return $this->belongsToMany(Student::class, 'student_group');
+//    }
 }

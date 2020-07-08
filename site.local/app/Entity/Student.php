@@ -65,10 +65,10 @@ class Student extends Model
     /**
      * @return BelongsToMany
      */
-    public function groups(): BelongsToMany
-    {
-        return $this->belongsToMany(Group::class, 'student_group');
-    }
+//    public function groups(): BelongsToMany
+//    {
+//        return $this->belongsToMany(Group::class, 'student_group');
+//    }
 
     /**
      * @return BelongsToMany

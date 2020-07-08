@@ -31,10 +31,10 @@ class Task extends Model
     /**
      * @return BelongsTo
      */
-    public function lesson(): BelongsTo
-    {
-        return $this->belongsTo(Lesson::class);
-    }
+//    public function lesson(): BelongsTo
+//    {
+//        return $this->belongsTo(Lesson::class);
+//    }
 
     /**
      * @return BelongsToMany

@@ -29,8 +29,8 @@ class SkillLevel extends Model
     /**
      * @return BelongsTo
      */
-    public function skill(): BelongsTo
-    {
-        return $this->belongsTo(Skill::class);
-    }
+//    public function skill(): BelongsTo
+//    {
+//        return $this->belongsTo(Skill::class);
+//    }
 }

@@ -30,16 +30,16 @@ class Lesson extends Model
     /**
      * @return BelongsTo
      */
-    public function course(): BelongsTo
-    {
-        return $this->belongsTo(Course::class);
-    }
+//    public function course(): BelongsTo
+//    {
+//        return $this->belongsTo(Course::class);
+//    }
 
     /**
      * @return HasMany
      */
-    public function tasks(): HasMany
-    {
-        return $this->hasMany(Task::class);
-    }
+//    public function tasks(): HasMany
+//    {
+//        return $this->hasMany(Task::class);
+//    }
 }

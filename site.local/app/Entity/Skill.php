@@ -45,8 +45,8 @@ class Skill extends Model
     /**
      * @return BelongsToMany
      */
-    public function levels(): BelongsToMany
-    {
-        return $this->belongsToMany(SkillLevel::class);
-    }
+//    public function levels(): BelongsToMany
+//    {
+//        return $this->belongsToMany(SkillLevel::class);
+//    }
 }

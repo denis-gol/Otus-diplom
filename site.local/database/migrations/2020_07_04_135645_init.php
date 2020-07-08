@@ -15,16 +15,16 @@ class Init extends Migration
     {
         $this->createStudentTable();
         $this->createAchievementTable();
-        $this->createCourseTable();
-        $this->createGroupTable();
+//        $this->createCourseTable();
+//        $this->createGroupTable();
         $this->createLessonTable();
         $this->createTaskTable();
         $this->createSkillTable();
         $this->createStudentAchievementTable();
-        $this->createStudentGroupTable();
+//        $this->createStudentGroupTable();
         $this->createTaskStudentTable();
         $this->createTaskSkillTable();
-        $this->createSkillLevel();
+//        $this->createSkillLevel();
         $this->createStudentSkill();
     }
 
@@ -83,7 +83,7 @@ class Init extends Migration
             $table->string('description');
             $table->text('goal');
             $table->integer('course_id');
-            $table->foreign('course_id')->references('id')->on('course');
+//            $table->foreign('course_id')->references('id')->on('course');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
         });
@@ -97,7 +97,7 @@ class Init extends Migration
             $table->string('description');
             $table->integer('max_point');
             $table->integer('lesson_id');
-            $table->foreign('lesson_id')->references('id')->on('lesson');
+//            $table->foreign('lesson_id')->references('id')->on('lesson');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
         });
@@ -121,7 +121,7 @@ class Init extends Migration
         Schema::create('student_group', function (Blueprint $table) {
             $table->integer('group_id');
             $table->integer('student_id');
-            $table->foreign('group_id')->references('id')->on('group');
+//            $table->foreign('group_id')->references('id')->on('group');
             $table->foreign('student_id')->references('id')->on('student');
         });
     }
