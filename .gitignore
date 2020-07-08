@@ -2,3 +2,6 @@
 .env
 /site.local/storage/
 /site.local/bootstrap/cache/
+
+/docker/rabbitmq-persistence/
+!/docker/rabbitmq-persistence/.gitkeep
