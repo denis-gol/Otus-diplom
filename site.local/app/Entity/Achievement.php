@@ -7,6 +7,10 @@ namespace App\Entity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * Class Achievement
+ * @package App\Entity
+ */
 class Achievement extends Model
 {
     /**
@@ -27,7 +31,7 @@ class Achievement extends Model
      */
     public function students(): BelongsToMany
     {
-        return $this->belongsToMany(Student::class)->withPivot(['completed_date']);
+        return $this->belongsToMany(Student::class, 'student_achievement')->withPivot(['completed_date']);
     }
 
 }

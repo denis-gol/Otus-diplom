@@ -7,8 +7,11 @@ namespace App\Entity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Class Task
+ * @package App\Entity
+ */
 class Task extends Model
 {
 
@@ -38,11 +41,14 @@ class Task extends Model
      */
     public function students(): BelongsToMany
     {
-        return $this->belongsToMany(Student::class)->withPivot(['point', 'completed_date']);
+        return $this->belongsToMany(Student::class, 'task_student')->withPivot(['point', 'completed_date']);
     }
 
-    public function skills(): HasMany
+    /**
+     * @return BelongsToMany
+     */
+    public function skills(): BelongsToMany
     {
-        return $this->hasMany(Skill::class);
+        return $this->belongsToMany(Skill::class, 'task_skill');
     }
 }
