@@ -13,8 +13,5 @@ $factory->define(Student::class, function (Faker $faker, $item) {
         'user_id' => $user->id,
         'first_name' => $user->name,
         'last_name' => $faker->lastName,
-        'email' => $user->email,
-        'created_at' => now(),
-        'updated_at' => now(),
     ];
 });

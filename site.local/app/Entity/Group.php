@@ -6,8 +6,12 @@ namespace App\Entity;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * Class Group
+ * @package App\Entity
+ */
 class Group extends Model
 {
     /**
@@ -23,13 +27,19 @@ class Group extends Model
         'updated_at',
     ];
 
+    /**
+     * @return BelongsTo
+     */
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
 
-    public function students(): HasMany
+    /**
+     * @return BelongsToMany
+     */
+    public function students(): BelongsToMany
     {
-        return $this->hasMany(Student::class);
+        return $this->belongsToMany(Student::class, 'student_group');
     }
 }

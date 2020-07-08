@@ -7,6 +7,10 @@ namespace App\Entity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Class SkillLevel
+ * @package App\Entity
+ */
 class SkillLevel extends Model
 {
     /**

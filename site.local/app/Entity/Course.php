@@ -26,11 +26,17 @@ class Course extends Model
         'updated_at',
     ];
 
+    /**
+     * @return HasMany
+     */
     public function lessons(): HasMany
     {
         return $this->hasMany(Lesson::class);
     }
 
+    /**
+     * @return HasMany
+     */
     public function groups(): HasMany
     {
         return $this->hasMany(Group::class);

@@ -8,7 +8,6 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 /**
@@ -37,25 +36,34 @@ class Student extends Model
     }
 
     /**
-     * @return HasMany
+     * @return BelongsToMany
      */
-    public function tasks(): HasMany
+    public function tasks(): BelongsToMany
     {
-        return $this->hasMany(Task::class);
+        return $this->belongsToMany(Task::class, 'task_student');
     }
 
-    public function skills(): HasMany
+    /**
+     * @return BelongsToMany
+     */
+    public function skills(): BelongsToMany
     {
-        return $this->hasMany(Skill::class);
+        return $this->belongsToMany(Skill::class, 'student_skill');
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function groups(): BelongsToMany
     {
-        return $this->belongsToMany(Group::class);
+        return $this->belongsToMany(Group::class, 'student_group');
     }
 
-    public function achievements(): HasMany
+    /**
+     * @return BelongsToMany
+     */
+    public function achievements(): BelongsToMany
     {
-        return $this->hasMany(Achievement::class);
+        return $this->belongsToMany(Achievement::class, 'student_achievement');
     }
 }
