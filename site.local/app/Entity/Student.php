@@ -51,7 +51,7 @@ class Student extends Model
      */
     public function tasks(): BelongsToMany
     {
-        return $this->belongsToMany(Task::class, 'task_student');
+        return $this->belongsToMany(Task::class, 'task_student')->withPivot(['point', 'completed_date']);
     }
 
     /**
@@ -59,7 +59,7 @@ class Student extends Model
      */
     public function skills(): BelongsToMany
     {
-        return $this->belongsToMany(Skill::class, 'student_skill');
+        return $this->belongsToMany(Skill::class, 'student_skill')->withPivot(['points']);
     }
 
     /**

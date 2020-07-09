@@ -52,12 +52,10 @@ class TaskSeeder extends Seeder
         $tasks = Task::all();
         $tasks->each(function ($task) {
             $percent1 = random_int(1, 4)*10;
-            $percent2 = random_int(1, 4)*10;
 
             /** @var Task $task */
-            $task->skills()->attach([1], ['percent_for_skill' => $percent1]);
-            $task->skills()->attach([2], ['percent_for_skill' => $percent2]);
-            $task->skills()->attach([3], ['percent_for_skill' => 100-$percent1-$percent2]);
+            $task->skills()->attach([random_int(1,2)], ['percent_for_skill' => $percent1]);
+            $task->skills()->attach([3], ['percent_for_skill' => 100-$percent1]);
         });
     }
 }

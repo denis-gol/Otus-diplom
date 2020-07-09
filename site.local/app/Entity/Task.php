@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 /**
  * Class Task
  * @package App\Entity
+ *
+ * @property mixed skills
+ * @property int $id
  */
 class Task extends Model
 {

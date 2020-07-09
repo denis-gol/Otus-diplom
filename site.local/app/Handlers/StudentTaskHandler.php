@@ -30,27 +30,37 @@ class StudentTaskHandler
     }
 
     /**
-     * @param StudentTask $task
+     * @param StudentTask $studentTask
      */
-    public function handle(StudentTask $task): void
+    public function handle(StudentTask $studentTask)
     {
-        $student = Student::query()->where('id', $task->getStudentId())->get()->first();
-        $isTaskExist = Task::query()->where('id', $task->getTaskId())->exists();
-        if ($student instanceof Student && $isTaskExist) {
-            $this->processTask($student, $task);
-            $this->skillCalculator->calc($student);
-            $this->achievementCalculator->calc($student);
+
+        $student = Student::query()->where('id', $studentTask->getStudentId())->get()->first();
+        $task = Task::query()->where('id', $studentTask->getTaskId())->get()->first();
+        if ($student instanceof Student && $task instanceof Task) {
+            $this->processTask($student, $studentTask);
+            $this->skillCalculator->calc($student, $task);
+            $this->achievementCalculator->calc($student, $task);
 
 //            logs()->info("Task {$task->getTaskId()} successful added to Student {$task->getStudentId()}");
         }
     }
 
-    protected function processTask(Student $student, StudentTask $task): void
+    protected function processTask(Student $student, StudentTask $studentTask): void
     {
-        $student->tasks()->attach($task->getTaskId(), [
-            'point' => $task->getPoint(),
-            'completed_date' => $task->getCompletedDate()
-        ]);
+        $taskExist = $student->tasks()->newQuery()->where('id', $studentTask->getTaskId())->exists();
+        if ($taskExist) {
+            $student->tasks()->updateExistingPivot($studentTask->getTaskId(), [
+                'point' => $studentTask->getPoint(),
+                'completed_date' => $studentTask->getCompletedDate()
+            ]);
+        } else {
+            $student->tasks()->attach($studentTask->getTaskId(), [
+                'point' => $studentTask->getPoint(),
+                'completed_date' => $studentTask->getCompletedDate()
+            ]);
+        }
+
     }
 
 }
