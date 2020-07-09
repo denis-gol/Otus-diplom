@@ -133,6 +133,7 @@ class Init extends Migration
             $table->date('completed_date');
             $table->integer('student_id');
             $table->integer('task_id');
+            $table->unique(['student_id', 'task_id']);
             $table->foreign('student_id')->references('id')->on('student');
             $table->foreign('task_id')->references('id')->on('task');
         });
@@ -155,6 +156,7 @@ class Init extends Migration
             $table->integer('percent_for_skill');
             $table->integer('task_id');
             $table->integer('skill_id');
+            $table->unique(['skill_id', 'task_id']);
             $table->foreign('task_id')->references('id')->on('task');
             $table->foreign('skill_id')->references('id')->on('skill');
         });
@@ -179,6 +181,7 @@ class Init extends Migration
             $table->date('completed_date');
             $table->integer('student_id');
             $table->integer('achievement_id');
+            $table->unique(['student_id', 'achievement_id']);
             $table->foreign('student_id')->references('id')->on('student');
             $table->foreign('achievement_id')->references('id')->on('achievement');
         });
@@ -204,6 +207,7 @@ class Init extends Migration
             $table->integer('points');
             $table->integer('student_id');
             $table->integer('skill_id');
+            $table->unique(['student_id', 'skill_id']);
             $table->foreign('student_id')->references('id')->on('student');
             $table->foreign('skill_id')->references('id')->on('skill');
         });

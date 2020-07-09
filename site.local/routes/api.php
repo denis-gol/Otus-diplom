@@ -24,3 +24,8 @@ Route::apiResource('skill', 'API\SkillController');
 Route::apiResource('skill_level', 'API\SkillLevelController');
 Route::apiResource('task', 'API\TaskController');
 Route::apiResource('achievement', 'API\AchievementController');
+
+
+Route::prefix('interaction')->group(function () {
+    Route::post('sendTask', 'API\InteractionController@sendTask');
+});
