@@ -73,9 +73,9 @@ return [
             'connection' => PhpAmqpLib\Connection\AMQPLazyConnection::class,
             'hosts' => [
                 [
-                    'host' => env('RABBITMQ_HOST', '127.0.0.1'),
+                    'host' => env('RABBITMQ_HOST', 'rabbitmq'),
                     'port' => env('RABBITMQ_PORT', 5672),
-                    'user' => env('RABBITMQ_USER', 'guest'),
+                    'user' => env('RABBITMQ_USERNAME', 'guest'),
                     'password' => env('RABBITMQ_PASSWORD', 'guest'),
                     'vhost' => env('RABBITMQ_VHOST', '/'),
                 ],

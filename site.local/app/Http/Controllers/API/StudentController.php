@@ -35,27 +35,45 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $first_name = $request->input('first_name');
-        $last_name = $request->input('last_name');
-        $user = $request->input('user');
 
-        // проверка существования пользователя
-        if (User::where('id', $user['id'])->exists()) {
-            $student_id = Student::create([
-                'first_name' => $first_name,
-                'last_name' => $last_name,
-                'user_id' => $user['id'],
+        if (is_array($request->all())
+        && count($request->all()) == 3
+        ) {
+
+            /** todo эта херня не работает(( */
+            $validatedData = $request->validate([
+                'first_name' => 'required|size:66',
+                'last_name' => 'required',
+                'user_id' => 'required|integer|gt:0',
+            ]);
+
+            $first_name = $request->input('first_name');
+            $last_name = $request->input('last_name');
+            $user = $request->input('user');
+
+            // проверка существования пользователя
+            if (User::where('id', $user['id'])->exists()) {
+                $student_id = Student::create([
+                    'first_name' => $first_name,
+                    'last_name' => $last_name,
+                    'user_id' => $user['id'],
+                ]);
+            } else {
+                return response()->json([
+                    'error' => 'user not found',
+                ], 404);
+            }
+
+            return response()->json([
+                'message' => 'success',
+                'student_id' => $student_id->id,
             ]);
         } else {
             return response()->json([
-                'error' => 'user not found',
-            ], 404);
+                'error' => 'incorrect data',
+            ], 400);
         }
 
-        return response()->json([
-            'message' => 'success',
-            'student_id' => $student_id->id,
-        ]);
     }
 
     /**
