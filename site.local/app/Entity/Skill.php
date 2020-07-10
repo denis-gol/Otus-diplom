@@ -10,6 +10,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 /**
  * Class Skill
  * @package App\Entity
+ *
+ * @property mixed tasks
+ * @property mixed id
+ *
  */
 class Skill extends Model
 {
@@ -31,7 +35,7 @@ class Skill extends Model
      */
     public function students(): BelongsToMany
     {
-        return $this->belongsToMany(Student::class, 'student_skill')->withPivot(['point']);
+        return $this->belongsToMany(Student::class, 'student_skill')->withPivot(['points']);
     }
 
     /**
@@ -39,7 +43,7 @@ class Skill extends Model
      */
     public function tasks(): BelongsToMany
     {
-        return $this->belongsToMany(Task::class, 'task_skill')->withPivot(['point']);
+        return $this->belongsToMany(Task::class, 'task_skill')->withPivot(['percent_for_skill']);
     }
 
     /**

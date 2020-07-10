@@ -34,13 +34,14 @@ class InteractionController extends Controller
         $requestedModel = json_decode($request->getContent(), true);
         if (json_last_error() === 0) {
 
-            /** todo нужны проверки
-             * 1) полноты заполнения модели
-             * 2) Уже существования связки студент-задача. Тут вопрос что нужно делать игнорить, выдавать ошибку или затирать предыдущий результат. Скорее последнее.
+            /** todo
+             * 1) нужна проверка полноты заполнения модели
+             * 3) нужна проверка Непревышения максимального балла за задание
+             * 4) приём инфы по заданиям пачкой, а не по 1
              */
             $studentTask = $this->studentTaskFactory->make($requestedModel);
             StudentTaskJob::dispatch($studentTask);
-            return response()->json([]);
+            return response()->json(['message' => 'queued']);
         }else {
             return response()->json([
                 'message' => 'Invalid post data',

@@ -204,7 +204,7 @@ class Init extends Migration
     protected function createStudentSkill()
     {
         Schema::create('student_skill', function (Blueprint $table) {
-            $table->integer('points');
+            $table->float('points');
             $table->integer('student_id');
             $table->integer('skill_id');
             $table->unique(['student_id', 'skill_id']);
