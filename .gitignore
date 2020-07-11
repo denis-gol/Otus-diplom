@@ -5,3 +5,5 @@
 
 /docker/rabbitmq-persistence/
 !/docker/rabbitmq-persistence/.gitkeep
+
+*.log
