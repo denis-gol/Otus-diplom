@@ -15,29 +15,31 @@ class TaskSeeder extends Seeder
      */
     public function run()
     {
+        $faker = \Faker\Factory::create();
+
         DB::table('lesson')->orderBy('id')
-            ->each(function ($lesson) {
+            ->each(function ($lesson) use ($faker) {
                 $data = [
                     [
                         'lesson_id' => $lesson->id,
-                        'name' => Str::lower(Str::random()),
-                        'description' => Str::lower(Str::random()),
+                        'name' => ucfirst($faker->word),
+                        'description' => $faker->realText(50, 2),
                         'max_point' => random_int(6, 10),
                         'created_at' => now(),
                         'updated_at' => now(),
                     ],
                     [
                         'lesson_id' => $lesson->id,
-                        'name' => Str::lower(Str::random()),
-                        'description' => Str::lower(Str::random()),
+                        'name' => ucfirst($faker->word),
+                        'description' => $faker->realText(50, 2),
                         'max_point' => random_int(6, 10),
                         'created_at' => now(),
                         'updated_at' => now(),
                     ],
                     [
                         'lesson_id' => $lesson->id,
-                        'name' => Str::lower(Str::random()),
-                        'description' => Str::lower(Str::random()),
+                        'name' => ucfirst($faker->word),
+                        'description' => $faker->realText(50, 2),
                         'max_point' => random_int(6, 10),
                         'created_at' => now(),
                         'updated_at' => now(),

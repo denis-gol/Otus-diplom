@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Entity\Achievement;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class AchievementController extends Controller
@@ -10,11 +12,15 @@ class AchievementController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function index()
     {
-        //
+        $collection = Achievement::all();
+
+        return response()->json([
+            'tasks' => $collection
+        ]);
     }
 
     /**
@@ -32,11 +38,16 @@ class AchievementController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function show($id)
     {
-        //
+        /** @var Achievement $entity */
+        $entity = Achievement::findOrFail($id);
+
+        return response()->json([
+            'achievement' => $entity,
+        ]);
     }
 
     /**
