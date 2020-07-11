@@ -31,15 +31,15 @@ class AggregatedDataController extends Controller
             ], 404);
         }
 
-        $date = new DateTime();
+        // @todo
+        // получить из БД все задания, выполненные этим студентом
+        // вычислить и вернуть средний балл
 
 
         // return stub
         return response()->json([
             'your_id' => $id,
-            'date' => $date,
         ]);
-
     }
 
     /**
@@ -51,6 +51,10 @@ class AggregatedDataController extends Controller
      */
     public function numberOfLessons(Request $request, int $id)
     {
+
+        // @todo
+        // получить из БД количество заданий, выполненных этим студентом
+        // вернуть количество
 
         // return stub
         return response()->json([
