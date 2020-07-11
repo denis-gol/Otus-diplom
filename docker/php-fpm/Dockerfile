@@ -6,9 +6,10 @@ FROM php:7.4-fpm
 # for pecl_http (2): libicu-dev libidn11-dev libidn2-0-dev
 # for pdo_pgsql: libpq-dev
 
-RUN apt-get upgrade && apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y \
     git \
     wget \
+    htop \
     mc \
     autoconf \
     libtool \

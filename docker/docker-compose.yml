@@ -3,13 +3,14 @@ version: '3'
 services:
 
     main:
-        image: nginx:latest
-        container_name: nginx
+        build: "./main"
+        container_name: main
         ports:
             - "80:80"
         volumes:
+            - "./main/logs:/var/log/nginx/"
             - "../site.local:/var/www/site.local"
-            - "./nginx.conf:/etc/nginx/conf.d"
+            - "./main/nginx.conf:/etc/nginx/conf.d"
             - socket:/var/run
         depends_on:
             - "php"
@@ -31,12 +32,13 @@ services:
 
 ### Postgress Container #########################################
     pgs:
-        image: postgres
+        build: "./postgres"
         container_name: postgres
         ports:
             - "54320:5432"
         volumes:
-            - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+            - "../site.local:/var/www/site.local"
+            - "./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
         restart: always
         environment:
             POSTGRES_USER: ${DB_USERNAME}
@@ -47,12 +49,13 @@ services:
 
 ### RabbitMQ Container #########################################
     rabbitmq:
-        image: 'bitnami/rabbitmq:latest'
+        build: "./rabbitmq"
         container_name: rabbitmq
         ports:
             - '5672:5672'
             - '15672:15672'
         volumes:
+            - "../site.local:/var/www/site.local"
             - "rabbitmq-persistence:/bitnami"
         environment:
             - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD}
