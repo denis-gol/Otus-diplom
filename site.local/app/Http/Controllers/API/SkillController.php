@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Entity\Skill;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class SkillController extends Controller
@@ -10,11 +12,15 @@ class SkillController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function index()
     {
-        //
+        $collection = Skill::all();
+
+        return response()->json([
+            'tasks' => $collection
+        ]);
     }
 
     /**
@@ -32,11 +38,16 @@ class SkillController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function show($id)
     {
-        //
+        /** @var Skill $entity */
+        $entity = Skill::findOrFail($id);
+
+        return response()->json([
+            'skill' => $entity,
+        ]);
     }
 
     /**

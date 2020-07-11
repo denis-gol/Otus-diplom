@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Entity\Task;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -10,11 +12,18 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function index()
     {
-        //
+        $collection = Task::all();
+        $collection->each(function ($item) {
+            $item->lesson;
+        });
+
+        return response()->json([
+            'tasks' => $collection
+        ]);
     }
 
     /**
@@ -32,11 +41,17 @@ class TaskController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function show($id)
     {
-        //
+        /** @var Task $entity */
+        $entity = Task::findOrFail($id);
+        $entity->lesson;
+
+        return response()->json([
+            'task' => $entity,
+        ]);
     }
 
     /**
