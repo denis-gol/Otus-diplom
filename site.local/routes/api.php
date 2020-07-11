@@ -25,7 +25,20 @@ Route::apiResource('skill_level', 'API\SkillLevelController');
 Route::apiResource('task', 'API\TaskController');
 Route::apiResource('achievement', 'API\AchievementController');
 
-
+/**
+ * получить задание, выполненное студентом
+ */
 Route::prefix('interaction')->group(function () {
     Route::post('sendTask', 'API\InteractionController@sendTask');
 });
+
+/**
+ * вернуть агрегированные данные
+ */
+// средний балл студента по всем пройденным занятиям
+Route::get('getData/Student/{id}/gradePointAverage', 'API\AggregatedDataController@gradePointAverage')
+    ->name('aggregated.gradePointAverage');
+
+// количество пройденных занятий по всем курсам
+Route::get('getData/Student/{id}/numberOfLessons', 'API\AggregatedDataController@numberOfLessons')
+    ->name('aggregated.numberOfLessons');
