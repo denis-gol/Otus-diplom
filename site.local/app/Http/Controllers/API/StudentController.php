@@ -40,7 +40,7 @@ class StudentController extends Controller
         && count($request->all()) == 3
         ) {
 
-            /** todo эта херня не работает(( */
+            /** @todo валидация так не работает(( */
             $validatedData = $request->validate([
                 'first_name' => 'required|size:66',
                 'last_name' => 'required',
