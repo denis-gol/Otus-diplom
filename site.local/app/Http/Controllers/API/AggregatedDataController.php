@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Entity\Student;
 use App\Http\Controllers\Controller;
-use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class AggregatedData
@@ -25,20 +25,31 @@ class AggregatedDataController extends Controller
     public function gradePointAverage(Request $request, int $id)
     {
         // проверка существования студента
+        // @todo выкинуть это в middleware
+        // @todo добавить проверки остальных полей, валидация полей
         if (Student::where('id', $id)->doesntExist()) {
             return response()->json([
                 'error' => 'user not found',
             ], 404);
         }
 
-        // @todo
-        // получить из БД все задания, выполненные этим студентом
-        // вычислить и вернуть средний балл
+        $studentTaskQuery = DB::table('task_student')
+            ->where('student_id', $id)
+            ->leftJoin('task', 'task.id', '=', 'task_student.task_id')
+            ->get(['task_student.point', 'task.max_point'])->toArray();
 
+        // вычислить приведенный балл по каждому заданию (достигнутый уровень/максимальный уровень баллов)
+        $reducedPoints = array_map(function($item) {
+            return round($item->point / $item->max_point, 2);
+        }, $studentTaskQuery);
 
-        // return stub
+        // вычислить среднее значение по всем баллам
+        $averagePoints = round(array_sum($reducedPoints) / count($reducedPoints), 2);
+
         return response()->json([
-            'your_id' => $id,
+            'student_id' => $id,
+            'average_points' => $averagePoints,
+            'number_completed_tasks' => count($reducedPoints)
         ]);
     }
 
