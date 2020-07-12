@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
- * Class Achievement
+ * Class AchievementCalculationEvent
  * @package App\Entity
  */
 class Achievement extends Model

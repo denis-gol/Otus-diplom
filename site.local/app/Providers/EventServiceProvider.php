@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\AchievementCalculatorEvent;
+use App\Listeners\AchievementAvgGrades;
+use App\Listeners\AchievementExcellentTalkative;
+use App\Listeners\AchievementTalkative;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,6 +21,11 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        AchievementCalculatorEvent::class => [
+            AchievementAvgGrades::class,
+            AchievementTalkative::class,
+            AchievementExcellentTalkative::class,
+        ]
     ];
 
     /**
@@ -28,7 +36,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        //
     }
 }

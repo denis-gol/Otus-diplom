@@ -4,8 +4,8 @@
 namespace App\Handlers;
 
 
-use App\Calculators\AchievementCalculator;
-use App\Calculators\SkillCalculator;
+use App\Calculator\AchievementCalculator;
+use App\Calculator\SkillCalculator;
 use App\Entity\Student;
 use App\Entity\Task;
 use App\Model\StudentTask;
