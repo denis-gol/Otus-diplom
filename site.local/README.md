@@ -39,15 +39,39 @@
         - средний балл студента по всем выполненным заданиям  
         баллы возвращаются числом 0...1 (формат float, точность 2 знака после запятой)
         ```
-        GET /api/getData/Student/3/gradePointAverage
+        GET /api/getData/Student/{STUDENT_ID}/gradePointAverage
         
         Формат ответа:
-          {
+        {
               "student_id": 3,
               "average_points": 0.68,
               "number_completed_tasks": 4
-          }
+        }
       
         ```
+        - суммарное значение по всем навыкам студента
+        ```
+        GET /api/getData/Student/{STUDENT_ID}/skillLevels
+        
+        Формат ответа:
+        {
+            "student_id": 2,
+            "average_points": [
+                {
+                    "skill_id": 2,
+                    "name": "Говорение",
+                    "sum": 0.2
+                },
+                {
+                    "skill_id": 3,
+                    "name": "Письменная речь",
+                    "sum": 56.8
+                }
+            ]
+        }
+        ```
+        
     - по курсу
+        - В РАЗРАБОТКЕ
     - по навыку
+        - В РАЗРАБОТКЕ
