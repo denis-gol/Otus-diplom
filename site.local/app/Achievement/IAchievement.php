@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Achievements;
+namespace App\Achievement;
 
 
 interface IAchievement
