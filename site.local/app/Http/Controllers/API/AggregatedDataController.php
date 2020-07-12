@@ -101,7 +101,7 @@ class AggregatedDataController extends Controller
 
         return response()->json([
             'student_id' => $id,
-            'average_points' => $responseArray,
+            'skill_levels' => $responseArray,
         ]);
     }
 }
