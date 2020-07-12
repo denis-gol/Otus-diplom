@@ -35,6 +35,9 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        return response()->json([
+            'message' => 'maintenance mode',
+        ], 503);
 
         if (is_array($request->all())
         && count($request->all()) == 3
@@ -135,6 +138,10 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
+        return response()->json([
+            'message' => 'maintenance mode',
+        ], 503);
+
         // проверка существования студента
         if (Student::whereId($id)->doesntExist()) {
             return response()->json([
