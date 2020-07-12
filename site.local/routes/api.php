@@ -39,6 +39,6 @@ Route::prefix('interaction')->group(function () {
 Route::get('getData/Student/{id}/gradePointAverage', 'API\AggregatedDataController@gradePointAverage')
     ->name('aggregated.gradePointAverage');
 
-// количество пройденных занятий по всем курсам
-Route::get('getData/Student/{id}/numberOfLessons', 'API\AggregatedDataController@numberOfLessons')
-    ->name('aggregated.numberOfLessons');
+// суммарное значение по всем навыкам студента
+Route::get('getData/Student/{id}/skillLevels', 'API\AggregatedDataController@skillLevels')
+    ->name('aggregated.skillLevels');
