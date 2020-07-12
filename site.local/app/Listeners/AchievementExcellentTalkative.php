@@ -1,11 +1,12 @@
 <?php
 
+
 namespace App\Listeners;
 
 
 use App\Events\AchievementCalculatorEvent;
 
-class AchievementBestGrades
+class AchievementExcellentTalkative
 {
     /**
      * Handle the event.
@@ -15,6 +16,6 @@ class AchievementBestGrades
      */
     public function handle(AchievementCalculatorEvent $event)
     {
-        // some handler
+        logs()->info(self::class);
     }
 }
