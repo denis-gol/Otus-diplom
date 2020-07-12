@@ -16,7 +16,7 @@ class AchievementSeeder extends Seeder
             [
                 'name' => 'Простой орел',
                 'description' => 'Средний балл не ниже 3',
-                'discriminator' => '\App\Listeners\AchievementAvgGrades',
+                'discriminator' => 'App\Listeners\AchievementAvgGrades',
                 'threshold' => 3,
                 'icon' => 'simple_bird.png',
                 'created_at' => now(),
@@ -25,7 +25,7 @@ class AchievementSeeder extends Seeder
             [
                 'name' => 'Мудрый орел',
                 'description' => 'Средний балл не ниже 4',
-                'discriminator' => '\App\Listeners\AchievementAvgGrades',
+                'discriminator' => 'App\Listeners\AchievementAvgGrades',
                 'threshold' => 4,
                 'icon' => 'wise_bird.png',
                 'created_at' => now(),
@@ -34,7 +34,7 @@ class AchievementSeeder extends Seeder
             [
                 'name' => 'Супер орел',
                 'description' => 'Средний балл не ниже 5',
-                'discriminator' => '\App\Listeners\AchievementAvgGrades',
+                'discriminator' => 'App\Listeners\AchievementAvgGrades',
                 'threshold' => 5,
                 'icon' => 'super_bird.png',
                 'created_at' => now(),
@@ -43,7 +43,7 @@ class AchievementSeeder extends Seeder
             [
                 'name' => 'Ясли',
                 'description' => 'Выполнил первое задания разговорного навыка',
-                'discriminator' => '\App\Listeners\AchievementTalkative',
+                'discriminator' => 'App\Listeners\AchievementTalkative',
                 'threshold' => 1,
                 'icon' => 'baby.png',
                 'created_at' => now(),
@@ -52,7 +52,7 @@ class AchievementSeeder extends Seeder
             [
                 'name' => 'Детсадовец',
                 'description' => 'Преодолел 3 задания разговорного навыка',
-                'discriminator' => '\App\Listeners\AchievementTalkative',
+                'discriminator' => 'App\Listeners\AchievementTalkative',
                 'threshold' => 1,
                 'icon' => 'kindergartner.png',
                 'created_at' => now(),
@@ -61,7 +61,7 @@ class AchievementSeeder extends Seeder
             [
                 'name' => 'Андрей Малахов',
                 'description' => 'Выполнил все задания разговорного навыка',
-                'discriminator' => '\App\Listeners\AchievementExcellentTalkative',
+                'discriminator' => 'App\Listeners\AchievementExcellentTalkative',
                 'threshold' => 1,
                 'icon' => 'malakhov.png',
                 'created_at' => now(),

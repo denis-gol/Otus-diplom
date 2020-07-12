@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 /**
  * Class Student
  * @package App\Entity
+ *
+ * @property mixed id
  */
 class Student extends Model
 {
