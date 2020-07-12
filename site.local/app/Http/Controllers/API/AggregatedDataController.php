@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Entity\Student;
 use App\Http\Controllers\Controller;
+use App\Utils\GradeUtils;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,18 @@ use Illuminate\Support\Facades\DB;
  */
 class AggregatedDataController extends Controller
 {
+    /** @var GradeUtils */
+    protected $gradeUtils;
+
+    /**
+     * AggregatedDataController constructor.
+     * @param GradeUtils $gradeUtils
+     */
+    public function __construct(GradeUtils $gradeUtils)
+    {
+        $this->gradeUtils = $gradeUtils;
+    }
+
     /**
      * Вернуть средний балл студента по всем пройденным занятиям
      *
@@ -36,25 +49,10 @@ class AggregatedDataController extends Controller
             ], 404);
         }
 
-        $studentTaskQuery = DB::table('task_student')
-            ->select(['task_student.point', 'task.max_point'])
-            ->where('student_id', $id)
-            ->leftJoin('task', 'task.id', '=', 'task_student.task_id')
-            ->get()
-            ->toArray();
-
-        // вычислить приведенный балл по каждому заданию (достигнутый уровень/максимальный уровень баллов)
-        $reducedPoints = array_map(function($item) {
-            return round($item->point / $item->max_point, 2);
-        }, $studentTaskQuery);
-
-        // вычислить среднее значение по всем баллам
-        $averagePoints = round(array_sum($reducedPoints) / count($reducedPoints), 2);
-
         return response()->json([
             'student_id' => $id,
-            'average_points' => $averagePoints,
-            'number_completed_tasks' => count($reducedPoints)
+            'average_points' => $this->gradeUtils->getAverageGradesByStudentID($id),
+            'number_completed_tasks' => count($this->gradeUtils->getReducedPoints($id))
         ]);
     }
 

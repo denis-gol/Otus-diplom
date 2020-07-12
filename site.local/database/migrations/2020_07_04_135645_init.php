@@ -170,7 +170,7 @@ class Init extends Migration
             $table->string('description');
             $table->string('discriminator');
             $table->string('icon');
-            $table->string('threshold');
+            $table->float('threshold');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
         });
@@ -195,7 +195,7 @@ class Init extends Migration
             $table->integer('skill_id');
             $table->string('name');
             $table->string('description');
-            $table->integer('threshold');
+            $table->float('threshold');
             $table->foreign('skill_id')->references('id')->on('skill');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
