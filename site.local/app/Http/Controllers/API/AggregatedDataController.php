@@ -49,7 +49,9 @@ class AggregatedDataController extends Controller
         }, $studentTaskQuery);
 
         // вычислить среднее значение по всем баллам
-        $averagePoints = round(array_sum($reducedPoints) / count($reducedPoints), 2);
+        if (count($reducedPoints) > 0) {
+            $averagePoints = round(array_sum($reducedPoints) / count($reducedPoints), 2);
+        }
 
         return response()->json([
             'student_id' => $id,
