@@ -1,17 +1,18 @@
 <?php
 
 
-namespace App\Calculators;
+namespace App\Calculator;
 
 
 use App\Entity\Student;
 use App\Entity\Task;
+use App\Events\AchievementCalculatorEvent;
 
 class AchievementCalculator implements ICalculatorInterface
 {
     public function calc(Student $student, Task $task)
     {
-        // TODO: Implement calc() method.
+        AchievementCalculatorEvent::dispatch($student);
     }
 
 }

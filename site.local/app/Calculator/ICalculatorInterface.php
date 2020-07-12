@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Calculators;
+namespace App\Calculator;
 
 
 use App\Entity\Student;

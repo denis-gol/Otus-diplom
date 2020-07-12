@@ -169,6 +169,7 @@ class Init extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('discriminator');
+            $table->string('icon');
             $table->string('threshold');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
