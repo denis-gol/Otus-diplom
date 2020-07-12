@@ -70,6 +70,31 @@
             ]
         }
         ```
+      
+        - список достижений студента
+        ```
+        GET /api/getData/Student/{STUDENT_ID}/achievements
+        
+        Формат ответа:
+        {
+            "student_id": 3,
+            "count_of_achievements": 2,
+            "achievement_list": [
+                {
+                    "id": 1,
+                    "name": "Простой орел",
+                    "description": "Средний балл не ниже 3",
+                    "completed_date": "2020-01-02"
+                },
+                {
+                    "id": 4,
+                    "name": "Занятый",
+                    "description": "Провел 10 часов за уроками",
+                    "completed_date": "2020-02-21"
+                }
+            ]
+        }
+        ```
         
     - по курсу
         - В РАЗРАБОТКЕ

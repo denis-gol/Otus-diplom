@@ -42,3 +42,7 @@ Route::get('getData/Student/{id}/gradePointAverage', 'API\AggregatedDataControll
 // суммарное значение по всем навыкам студента
 Route::get('getData/Student/{id}/skillLevels', 'API\AggregatedDataController@skillLevels')
     ->name('aggregated.skillLevels');
+
+// список достижений по студенту
+Route::get('getData/Student/{id}/achievements', 'API\AggregatedDataController@achievements')
+    ->name('aggregated.achievements');

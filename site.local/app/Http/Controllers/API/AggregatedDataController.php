@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * Class AggregatedData
  * Формирование и возврат агрегированных данных
+ *
  * @package App\Http\Controllers\API
  */
 class AggregatedDataController extends Controller
@@ -36,9 +37,10 @@ class AggregatedDataController extends Controller
         }
 
         $studentTaskQuery = DB::table('task_student')
+            ->select(['task_student.point', 'task.max_point'])
             ->where('student_id', $id)
             ->leftJoin('task', 'task.id', '=', 'task_student.task_id')
-            ->get(['task_student.point', 'task.max_point'])
+            ->get()
             ->toArray();
 
         // вычислить приведенный балл по каждому заданию (достигнутый уровень/максимальный уровень баллов)
@@ -103,5 +105,39 @@ class AggregatedDataController extends Controller
             'student_id' => $id,
             'skill_levels' => $responseArray,
         ]);
+    }
+
+    /**
+     * Вернуть список достижений студента
+     *
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function achievements(Request $request, int $id)
+    {
+        // проверка существования студента
+        // @todo выкинуть это в middleware
+        // @todo добавить проверки остальных полей, валидация полей
+        if (Student::where('id', $id)->doesntExist()) {
+            return response()->json([
+                'error' => 'user not found',
+            ], 404);
+        }
+
+        $studentAchievementQuery = DB::table('student')
+            ->select(['achievement.id', 'achievement.name', 'achievement.description', 'student_achievement.completed_date'])
+            ->where('student_id', $id)
+            ->leftJoin('student_achievement', 'student.id', '=', 'student_achievement.student_id')
+            ->leftJoin('achievement', 'student_achievement.achievement_id', '=', 'achievement.id')
+            ->get()
+            ->toArray();
+
+        return response()->json([
+            'student_id' => $id,
+            'count_of_achievements' => count($studentAchievementQuery),
+            'achievement_list' => $studentAchievementQuery,
+        ]);
+
     }
 }
