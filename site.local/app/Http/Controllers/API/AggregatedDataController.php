@@ -48,7 +48,7 @@ class AggregatedDataController extends Controller
                 'error' => 'user not found',
             ], 404);
         }
-
+      
         return response()->json([
             'student_id' => $id,
             'average_points' => $this->gradeUtils->getAverageGradesByStudentID($id),
