@@ -22,10 +22,7 @@ class GradeUtils
         $reducedPoints = $this->getReducedPoints($id);
 
         // вычислить среднее значение по всем баллам
-        /** @var float $averagePoints */
-        $averagePoints = round(array_sum($reducedPoints) / count($reducedPoints), 2);
-
-        return $averagePoints;
+        return (count($reducedPoints) > 0) ? round(array_sum($reducedPoints) / count($reducedPoints), 2) : 0;
     }
 
     /**
