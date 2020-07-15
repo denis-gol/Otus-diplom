@@ -1,9 +1,13 @@
 <?php
 
+use App\Entity\Skill;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class
-SkillSeeder extends Seeder
+/**
+ * Class SkillSeeder
+ */
+class SkillSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,18 +20,21 @@ SkillSeeder extends Seeder
             [
                 'name' => 'Аудирование',
                 'description' => 'Навык аудирования',
+                'type' => Skill::OTHER_TYPE_CODE,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'name' => 'Говорение',
                 'description' => 'Умение говорить, правильность произношения',
+                'type' => Skill::TALKATIVE_TYPE_CODE,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'name' => 'Письменная речь',
                 'description' => 'Навык хорошо писать',
+                'type' => Skill::OTHER_TYPE_CODE,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

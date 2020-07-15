@@ -17,6 +17,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  */
 class Skill extends Model
 {
+
+    const TALKATIVE_TYPE_CODE = 'talkative';
+    const OTHER_TYPE_CODE = 'other_code';
+
     /**
      * The table associated with the model.
      *

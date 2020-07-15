@@ -53,7 +53,7 @@ class AchievementSeeder extends Seeder
                 'name' => 'Детсадовец',
                 'description' => 'Преодолел 3 задания разговорного навыка',
                 'discriminator' => 'App\Listeners\AchievementTalkative',
-                'threshold' => 1,
+                'threshold' => 3,
                 'icon' => 'kindergartner.png',
                 'created_at' => now(),
                 'updated_at' => now(),

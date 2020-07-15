@@ -144,6 +144,7 @@ class Init extends Migration
         Schema::create('skill', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('type');
             $table->string('description');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
